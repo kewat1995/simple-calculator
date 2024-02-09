@@ -1,35 +1,47 @@
-
 let display = document.getElementById("input-box");
 let Buttons = document.querySelectorAll(".btn");
 let equalButton = document.querySelector(".equal");
 let buttonDE = document.querySelector(".btn1");
 
-Buttons.forEach((button)=>{
-    button.addEventListener("click",function(e){
+Buttons.forEach((button) => {
+  button.addEventListener("click", function (e) {
+    var v = e.target.value;
+    var oldValue = display.value;
 
-        if (e.target.value == "AC") {
-             return display.value = " ";
-        }
-       
-        else if(e.target.value == " = "){
-            return;
+    var t = oldValue.length;
 
-        }
-       
-        display.value += e.target.value;
-    })
-})
+    var lastChar = oldValue[t - 1];
 
-equalButton.addEventListener("click" ,function(e){
-    if(display.value == ""){
-        return alert("enter value")
+    var oprSym = ["+", "-", "*", "/", "."];
+
+    if (oprSym.includes(v)) {
+      if (oprSym.includes(lastChar)) {
+        var removelastValue = oldValue.slice(0, -1);
+        display.value = removelastValue + v;
+        console.log(removelastValue);
+      } else {
+        display.value = oldValue + v;
+      }
+    } else {
+      display.value = oldValue + v;
     }
 
-    display.value = eval(display.value)
-})
+    if (e.target.value == "AC") {
+      return (display.value = " ");
+    } else if (e.target.value == " = ") {
+      return;
+    }
+  });
+});
 
-buttonDE.addEventListener("click", function(){
+equalButton.addEventListener("click", function (e) {
+  if (display.value == "") {
+    return alert("enter value");
+  }
 
-    display.value = display.value.toString().slice(0,-1)
-})
+  display.value = eval(display.value);
+});
 
+buttonDE.addEventListener("click", function () {
+  display.value = display.value.toString().slice(0, -1);
+});

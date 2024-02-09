@@ -65,7 +65,7 @@ form .display input {
     flex: 1;
     text-align: right;
     box-shadow: none;
-    
+    font-size: 22px;
   }
   .calculator form .equal {
     width: 100px;
